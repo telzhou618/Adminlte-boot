@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<head th:replace="common/head" />
+<style type="text/css">
+    html { overflow: hidden; }
+</style>
+</head>
+<body class="hold-transition skin-blue sidebar-mini fixed">
+<div class="wrapper">
+
+	<header th:replace="common/header"></header>
+    <aside th:replace="common/menu"></aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" id="content-wrapper" style="min-height: 421px;">
+        <!--bootstrap tab风格 多标签页-->
+        <div th:replace="common/tool"></div>
+        <div class="content-iframe " style="background-color: #ffffff; ">
+            <div class="tab-content " id="tab-content">
+            </div>
+        </div>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer th:replace="common/footer"></footer>
+    <aside th:replace="common/setting"></aside>
+    
+    <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+<p th:replace="common/js" />
+<script type="text/javascript">
+    /**
+     * 本地搜索菜单
+     */
+    function search_menu() {
+        //要搜索的值
+        var text = $('input[name=q]').val();
+
+        var $ul = $('.sidebar-menu');
+        $ul.find("a.nav-link").each(function () {
+            var $a = $(this).css("border","");
+
+            //判断是否含有要搜索的字符串
+            if ($a.children("span.menu-text").text().indexOf(text) >= 0) {
+
+                //如果a标签的父级是隐藏的就展开
+                $ul = $a.parents("ul");
+
+                if ($ul.is(":hidden")) {
+                    $a.parents("ul").prev().click();
+                }
+
+                //点击该菜单
+                $a.click().css("border","1px solid");
+
+            }
+        });
+    }
+
+    $(function () {
+
+        App.setbasePath("/");
+        App.setGlobalImgPath("img/");
+
+        addTabs({
+            id: '10008',
+            title: '欢迎页',
+            close: false,
+            url: '/welcome.html',
+            urlType: "relative"
+        });
+        App.fixIframeCotent();
+        var menus = [
+            {
+                id: "9000",
+                text: "菜单",
+                icon: "",
+                isHeader: true
+            },
+            {
+                id: "1000",
+                text: "系统管理",
+                icon: "fa fa-folder-o",
+                children: [
+                    {
+                        id: "1001",
+                        text: "用户管理",
+                        icon: "fa fa-circle-o",
+                        url: "UI/buttons_iframe.html",
+                        targetType: "iframe-tab"
+                    },
+                    {
+                        id: "1002",
+                        text: "角色管理",
+                        url: "UI/icons_iframe.html",
+                        targetType: "iframe-tab",
+                        icon: "fa fa-circle-o"
+                    },
+                    {
+                        id: "1003",
+                        text: "菜单管理",
+                        url: "UI/general_iframe.html",
+                        targetType: "iframe-tab",
+                        icon: "fa fa-circle-o"
+                    },
+                    {
+                        id: "1004",
+                        text: "权限管理",
+                        url: "UI/modals_iframe.html",
+                        targetType: "iframe-tab",
+                        icon: "fa fa-circle-o"
+                    },
+                    {
+                        id: "1005",
+                        text: "监控管理",
+                        url: "UI/sliders_iframe.html",
+                        targetType: "iframe-tab",
+                        icon: "fa fa-circle-o"
+                    },
+                    {
+                        id: "1007",
+                        text: "任务管理",
+                        url: "UI/timeline_iframe.html",
+                        targetType: "iframe-tab",
+                        icon: "fa fa-circle-o"
+                    }
+                ]
+            },
+            {
+                id: "9001",
+                text: "UI Elements",
+                icon: "fa fa-folder-o",
+                children: [
+                    {
+                        id: "90011",
+                        text: "buttons",
+                        icon: "fa fa-circle-o",
+                        url: "UI/buttons_iframe.html",
+                        targetType: "iframe-tab"
+                    },
+                    {
+                        id: "90012",
+                        text: "icons",
+                        url: "UI/icons_iframe.html",
+                        targetType: "iframe-tab",
+                        icon: "fa fa-circle-o"
+                    },
+                    {
+                        id: "90013",
+                        text: "general",
+                        url: "UI/general_iframe.html",
+                        targetType: "iframe-tab",
+                        icon: "fa fa-circle-o"
+                    },
+                    {
+                        id: "90014",
+                        text: "modals",
+                        url: "UI/modals_iframe.html",
+                        targetType: "iframe-tab",
+                        icon: "fa fa-circle-o"
+                    },
+                    {
+                        id: "90015",
+                        text: "sliders",
+                        url: "UI/sliders_iframe.html",
+                        targetType: "iframe-tab",
+                        icon: "fa fa-circle-o"
+                    },
+                    {
+                        id: "90016",
+                        text: "timeline",
+                        url: "UI/timeline_iframe.html",
+                        targetType: "iframe-tab",
+                        icon: "fa fa-circle-o"
+                    }
+                ]
+            },
+            {
+                id: "9002",
+                text: "Forms",
+                icon: "fa fa-folder-o",
+                children: [
+                    {
+                        id: "90021",
+                        text: "advanced",
+                        url: "forms/advanced_iframe.html",
+                        targetType: "iframe-tab",
+                        icon: "fa fa-circle-o"
+                    },
+                    {
+                        id: "90022",
+                        text: "general",
+                        url: "forms/general_iframe.html",
+                        targetType: "iframe-tab",
+                        icon: "fa fa-circle-o"
+                    },
+                    {
+                        id: "90023",
+                        text: "editors",
+                        url: "forms/editors_iframe.html",
+                        targetType: "iframe-tab",
+                        icon: "fa fa-circle-o"
+                    }
+                ]
+            },
+            {
+                id: "9003",
+                text: "Table",
+                icon: "fa fa-folder-o"
+            }
+        ];
+        $('.sidebar-menu').sidebarMenu({data: menus});
+
+    });
+</script>
+
+</body>
+</html>
